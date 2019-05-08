@@ -46,7 +46,7 @@ namespace addressbook_web_test
             Login(new AccountData("admin", "secret"));
             driver.FindElement(By.LinkText("add new")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys("test");
+            driver.FindElement(By.Name("firstname")).SendKeys("Robottest");
             driver.FindElement(By.Name("middlename")).Clear();
             driver.FindElement(By.Name("middlename")).SendKeys("test");
             driver.FindElement(By.Name("lastname")).Clear();
@@ -83,6 +83,7 @@ namespace addressbook_web_test
             driver.FindElement(By.Name("phone2")).SendKeys("123");
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys("123");
+            driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
             HomePage();
             Logout();
         }
