@@ -43,10 +43,10 @@ namespace addressbook_web_test
         public void CreateGroup()
         {
             HomePage();
-            Login(new AccountData ("admin","secret"));
+            Login(new Class1_AccountData ("admin","secret"));
             GroupsPage();
             InitNewGroupCreation();
-            GroupData group = new GroupData("another");
+            Class2_GroupData group = new Class2_GroupData("another");
             group.Header = "test";
             group.Footer = "Group";
             FillGroupForm(group);
@@ -65,7 +65,7 @@ namespace addressbook_web_test
             driver.FindElement(By.Name("submit")).Click();
         }
 
-        private void FillGroupForm(GroupData group)
+        private void FillGroupForm(Class2_GroupData group)
         {
             driver.FindElement(By.Name("group_name")).Clear();
             driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
@@ -90,7 +90,7 @@ namespace addressbook_web_test
             driver.Navigate().GoToUrl(baseURL);
         }
 
-        private void Login(AccountData account)
+        private void Login(Class1_AccountData account)
         {
             driver.FindElement(By.Name("user")).Clear();
             driver.FindElement(By.Name("user")).SendKeys(account.Username);

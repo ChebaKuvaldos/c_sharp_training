@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace addressbook_web_test
 {
-    class GroupData
+    class Class2_GroupData
     {
         private string name;
         private string header = "";
         private string footer = "";
 
-        public GroupData(string name)
+        public Class2_GroupData(string name)
         {
             this.Name = name;
         }

@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace addressbook_web_test
 {
     [TestClass]
-    public class UnitTest1
+    public class Test0_Empty
     {
         [TestMethod]
         public void TestMethod1()
