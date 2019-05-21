@@ -12,17 +12,17 @@ namespace addressbook_web_test
         [Test]
         public void TheAddContactTest()
         {
-            HomePage();
-            Login(new Class1_AccountData("admin", "secret"));
-            InitAddContact();
+            navigator.HomePage();
+            loginHelper.Login(new Class1_AccountData("admin", "secret"));
+            navigator.InitAddContact();
             Class3_ContactData contact = new Class3_ContactData();
             contact.Firstname = "Petya";
             contact.Lastname = "Dude";
             contact.Mobile = "+791111111";
-            FillContactData(contact);
-            AddContactSubmit();
-            HomePage();
-            Logout();
+            contactHelper.FillContactData(contact);
+            contactHelper.AddContactSubmit();
+            navigator.HomePage();
+            navigator.Logout();
         }
     }
 }
