@@ -12,17 +12,18 @@ namespace addressbook_web_test
     {
         
 
-        public loginHelper (IWebDriver driver) 
-            : base (driver)
+        public loginHelper (ApplicationManager manager) 
+            : base (manager)
         {
         }
-        public void Login(Class1_AccountData account)
+        public loginHelper Login(Class1_AccountData account)
         {
             driver.FindElement(By.Name("user")).Clear();
             driver.FindElement(By.Name("user")).SendKeys(account.Username);
             driver.FindElement(By.Name("pass")).Clear();
             driver.FindElement(By.Name("pass")).SendKeys(account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+            return this;
         }
     }
 }

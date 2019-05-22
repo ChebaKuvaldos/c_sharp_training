@@ -12,26 +12,30 @@ namespace addressbook_web_test
     {
         private string baseURL;
 
-        public NavigationHelper(IWebDriver driver,string baseURL) 
-            : base(driver)
+        public NavigationHelper(ApplicationManager manager, string baseURL) 
+            : base(manager)
         {
             this.baseURL = baseURL;
         }
-        public void HomePage()
+        public NavigationHelper HomePage()
         {
             driver.Navigate().GoToUrl(baseURL);
+            return this;
         }
-        public void GroupsPage()
+        public NavigationHelper GroupsPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
+            return this;
         }
-        public void InitAddContact()
+        public NavigationHelper InitAddContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
         }
-        public void Logout()
+        public NavigationHelper Logout()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
+            return this;
         }
     }
 }

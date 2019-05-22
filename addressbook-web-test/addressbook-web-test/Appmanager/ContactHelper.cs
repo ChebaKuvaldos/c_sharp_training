@@ -9,14 +9,16 @@ using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_web_test
 {
-   public class ContactHelper : HelperBase
+    public class ContactHelper : HelperBase
     {
 
-        public ContactHelper(IWebDriver driver) 
-            : base(driver)
+        public ContactHelper(ApplicationManager manager)
+            : base(manager)
         {
         }
-        public void FillContactData(Class3_ContactData contact)
+
+
+        public ContactHelper FillContactData(Class3_ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
@@ -56,10 +58,23 @@ namespace addressbook_web_test
             driver.FindElement(By.Name("phone2")).SendKeys(contact.Phone2);
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
+            return this;
         }
-        public void AddContactSubmit()
+        public ContactHelper AddContactSubmit()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            return this;
+        }
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath("(//input [@name='selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper DeleteSelectedContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
         }
     }
 }
