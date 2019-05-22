@@ -59,18 +59,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1_AccountData.cs" />
-    <Compile Include="Class2_GroupData.cs" />
-    <Compile Include="Class3_ContactData.cs" />
-    <Compile Include="ContactHelper.cs" />
-    <Compile Include="GroupHelper.cs" />
-    <Compile Include="HelperBase.cs" />
-    <Compile Include="LoginHelper.cs" />
-    <Compile Include="NavigationHelper.cs" />
+    <Compile Include="Appmanager\ApplicationManager.cs" />
+    <Compile Include="Model\Class1_AccountData.cs" />
+    <Compile Include="Model\Class2_GroupData.cs" />
+    <Compile Include="Model\Class3_ContactData.cs" />
+    <Compile Include="Appmanager\ContactHelper.cs" />
+    <Compile Include="Appmanager\GroupHelper.cs" />
+    <Compile Include="Appmanager\HelperBase.cs" />
+    <Compile Include="Appmanager\LoginHelper.cs" />
+    <Compile Include="Appmanager\NavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test1_CreateGroup.cs" />
-    <Compile Include="Test2_AddContact.cs" />
-    <Compile Include="TestBase.cs" />
+    <Compile Include="Tests\Test1_CreateGroup.cs" />
+    <Compile Include="Tests\Test2_AddContact.cs" />
+    <Compile Include="Tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
