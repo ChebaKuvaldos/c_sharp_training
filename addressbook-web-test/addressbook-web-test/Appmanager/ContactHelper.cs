@@ -17,6 +17,11 @@ namespace addressbook_web_test
         {
         }
 
+        public ContactHelper EditContact()
+        {
+            driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
+            return this;
+        }
 
         public ContactHelper FillContactData(Class3_ContactData contact)
         {
@@ -60,6 +65,13 @@ namespace addressbook_web_test
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
             return this;
         }
+
+        internal ContactHelper UpdateContact()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
         public ContactHelper AddContactSubmit()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();

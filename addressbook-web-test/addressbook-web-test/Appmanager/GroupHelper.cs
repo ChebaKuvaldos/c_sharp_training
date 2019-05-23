@@ -17,11 +17,25 @@ namespace addressbook_web_test
             : base(manager)
         {
         }
+
+        public GroupHelper ModifySelectedGroup()
+        {
+            driver.FindElement(By.Name("edit")).Click();
+            return this;
+        }
+
         public GroupHelper InitNewGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
             return this;
         }
+
+        public GroupHelper UpdateGroup()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
         public GroupHelper FillGroupForm(Class2_GroupData group)
         {
             driver.FindElement(By.Name("group_name")).Clear();

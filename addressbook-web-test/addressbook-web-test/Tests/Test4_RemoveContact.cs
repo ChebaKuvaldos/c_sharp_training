@@ -14,8 +14,8 @@ namespace addressbook_web_test
         {
             app.Contacts.SelectContact(1)
                       .DeleteSelectedContact();
-            app.Navigator.HomePage()
-                         .Logout();
+            app.Driver.SwitchTo().Alert().Accept();
+            app.Navigator.Logout();
         }
     }
 }
