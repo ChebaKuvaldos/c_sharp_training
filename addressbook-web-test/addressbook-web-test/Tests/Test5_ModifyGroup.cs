@@ -13,9 +13,9 @@ namespace addressbook_web_test
         public void ModifyGroupTest()
         {
             app.Navigator.GroupsPage();
-            Class2_GroupData group = new Class2_GroupData("Umpa");
-            group.Header = "Biba";
-            group.Footer = "Boba";
+            Class2_GroupData group = new Class2_GroupData("Cosa");
+            group.Header = null;
+            group.Footer = null;
             app.Groups.SelectGroup(1)
                       .ModifySelectedGroup()
                       .FillGroupForm(group)

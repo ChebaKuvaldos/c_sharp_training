@@ -13,9 +13,9 @@ namespace addressbook_web_test
         public void ModifyContactTest()
         {
             Class3_ContactData contact = new Class3_ContactData();
-            contact.Firstname = "Tyotya";
-            contact.Lastname = "Motya";
-            contact.Mobile = "666777666";
+            contact.Firstname = "Croopper";
+            contact.Lastname = null;
+            contact.Mobile = null;
             app.Contacts.EditContact()
                         .FillContactData(contact)
                         .UpdateContact();
