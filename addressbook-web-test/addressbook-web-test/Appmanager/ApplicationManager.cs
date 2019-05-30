@@ -47,7 +47,9 @@ namespace addressbook_web_test
         {
             if (! app.IsValueCreated)
             {
-                app.Value = new ApplicationManager();
+                ApplicationManager newInstanse = new ApplicationManager();
+                newInstanse.Navigator.HomePage();
+                app.Value = newInstanse;
             }
             return app.Value;
         }

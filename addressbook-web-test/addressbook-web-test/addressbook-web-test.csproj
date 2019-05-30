@@ -69,14 +69,15 @@
     <Compile Include="Appmanager\LoginHelper.cs" />
     <Compile Include="Appmanager\NavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\Test1_CreateGroup.cs" />
     <Compile Include="Tests\Test2_AddContact.cs" />
     <Compile Include="Tests\Test3_RemoveGroup.cs" />
     <Compile Include="Tests\Test4_RemoveContact.cs" />
     <Compile Include="Tests\Test5_ModifyGroup.cs" />
     <Compile Include="Tests\Test6_ModifyContact.cs" />
+    <Compile Include="Tests\Test7_LoginTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
-    <Compile Include="Tests\TestSuiteFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
