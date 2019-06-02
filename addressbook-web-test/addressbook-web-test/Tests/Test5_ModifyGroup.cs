@@ -20,7 +20,7 @@ namespace addressbook_web_test
                       .ModifySelectedGroup()
                       .FillGroupForm(group)
                       .UpdateGroup();
-            app.Navigator.Logout();
+
         }
     }
 }

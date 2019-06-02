@@ -12,10 +12,11 @@ namespace addressbook_web_test
         [Test]
         public void RemoveContactTest()
         {
+            app.Navigator.HomePage();
             app.Contacts.SelectContact(1)
                       .DeleteSelectedContact();
             app.Driver.SwitchTo().Alert().Accept();
-            app.Navigator.Logout();
+
         }
     }
 }

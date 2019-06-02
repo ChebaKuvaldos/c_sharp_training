@@ -17,11 +17,7 @@ namespace addressbook_web_test
         {
         }
 
-        public ContactHelper EditContact()
-        {
-            driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
-            return this;
-        }
+
 
         public ContactHelper FillContactData(Class3_ContactData contact)
         {
@@ -61,6 +57,15 @@ namespace addressbook_web_test
         }
         public ContactHelper SelectContact(int index)
         {
+            if (IsElementPresent(By.XPath("(//input [@name='selected[]'])[" + index + "]")))
+            {
+                return this;
+            }
+            else
+            {
+                CreateContact();
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            }
             driver.FindElement(By.XPath("(//input [@name='selected[]'])[" + index + "]")).Click();
             return this;
         }
@@ -68,6 +73,36 @@ namespace addressbook_web_test
         public ContactHelper DeleteSelectedContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
+        public ContactHelper InitAddContact()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+            return this;
+        }
+        public ContactHelper EditContact()
+        {
+            if (IsElementPresent(By.CssSelector("img[alt=\"Edit\"]")))
+            {
+                return this;
+            }
+            else
+            {
+                CreateContact();
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            }
+            driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
+            return this;
+        }
+        public ContactHelper CreateContact()
+        {
+            InitAddContact();
+            Class3_ContactData contact = new Class3_ContactData();
+            contact.Firstname = "Petya";
+            contact.Lastname = "Dude";
+            contact.Mobile = "+791111111";
+            FillContactData(contact)
+                        .AddContactSubmit();
             return this;
         }
     }

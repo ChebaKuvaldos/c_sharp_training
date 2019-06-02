@@ -12,6 +12,7 @@ namespace addressbook_web_test
         [Test]
         public void ModifyContactTest()
         {
+            app.Navigator.HomePage();
             Class3_ContactData contact = new Class3_ContactData();
             contact.Firstname = "Croopper";
             contact.Lastname = null;
@@ -19,7 +20,7 @@ namespace addressbook_web_test
             app.Contacts.EditContact()
                         .FillContactData(contact)
                         .UpdateContact();
-            app.Navigator.Logout();
+
         }
     }
 }

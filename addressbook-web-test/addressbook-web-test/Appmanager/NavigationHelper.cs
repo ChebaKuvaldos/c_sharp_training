@@ -20,19 +20,24 @@ namespace addressbook_web_test
         }
         public NavigationHelper HomePage()
         {
+            if (driver.Url == baseURL)
+            {
+                return this;
+            }
             driver.Navigate().GoToUrl(baseURL);
             return this;
         }
         public NavigationHelper GroupsPage()
         {
+            if (driver.Url == baseURL + "/group.php"
+                && IsElementPresent(By.Name("New")))
+                    {
+                return this;
+            }
             driver.FindElement(By.LinkText("groups")).Click();
             return this;
         }
-        public NavigationHelper InitAddContact()
-        {
-            driver.FindElement(By.LinkText("add new")).Click();
-            return this;
-        }
+
         public NavigationHelper Logout()
         {
             driver.FindElement(By.LinkText("Logout")).Click();

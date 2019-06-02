@@ -15,8 +15,7 @@ namespace addressbook_web_test
             app.Navigator.GroupsPage();
             app.Groups.SelectGroup(1)
                       .DeleteSelectedGroup();
-            app.Navigator.HomePage()
-                         .Logout();
+
         }
     }
 }

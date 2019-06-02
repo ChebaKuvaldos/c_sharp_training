@@ -13,25 +13,26 @@ namespace addressbook_web_test
         [Test]
         public void CreateGroup()
         {
+            app.Navigator.GroupsPage();
             Class2_GroupData group = new Class2_GroupData("Group11");
             group.Header = "Root";
             group.Footer = "Good";
 
             app.Groups.Create(group);
 
-            app.Navigator.Logout();
+
         }
         [Test]
         public void CreateEmptyGroup()
         {
-
+            app.Navigator.GroupsPage();
             Class2_GroupData group = new Class2_GroupData("");
             group.Header = "";
             group.Footer = "";
 
             app.Groups.Create(group);
 
-            app.Navigator.Logout();
+
         }
     }
 }
