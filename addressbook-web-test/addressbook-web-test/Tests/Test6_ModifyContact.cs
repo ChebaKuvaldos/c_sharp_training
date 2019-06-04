@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace addressbook_web_test
 {
@@ -17,10 +18,14 @@ namespace addressbook_web_test
             contact.Firstname = "Croopper";
             contact.Lastname = null;
             contact.Mobile = null;
+            if (app.Contacts.IsElementPresent(By.CssSelector("img[alt=\"Edit\"]"))) { }
+            else
+            {
+                app.Contacts.CreateContact();
+            };
             app.Contacts.EditContact()
                         .FillContactData(contact)
                         .UpdateContact();
-
         }
     }
 }

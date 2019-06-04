@@ -26,10 +26,12 @@ namespace addressbook_web_test
                     return this;
                 }
                 Logout();
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             }
             Type(By.Name("user"), account.Username);
             Type(By.Name("pass"), account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             return this;
         }
 
@@ -50,6 +52,7 @@ namespace addressbook_web_test
             if (IsLoggedIn())
             {
                 driver.FindElement(By.LinkText("Logout")).Click();
+
             }
 
         }

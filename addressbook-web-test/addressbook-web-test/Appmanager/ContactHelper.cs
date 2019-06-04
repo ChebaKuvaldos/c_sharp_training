@@ -57,15 +57,6 @@ namespace addressbook_web_test
         }
         public ContactHelper SelectContact(int index)
         {
-            if (IsElementPresent(By.XPath("(//input [@name='selected[]'])[" + index + "]")))
-            {
-                return this;
-            }
-            else
-            {
-                CreateContact();
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            }
             driver.FindElement(By.XPath("(//input [@name='selected[]'])[" + index + "]")).Click();
             return this;
         }
@@ -82,15 +73,6 @@ namespace addressbook_web_test
         }
         public ContactHelper EditContact()
         {
-            if (IsElementPresent(By.CssSelector("img[alt=\"Edit\"]")))
-            {
-                return this;
-            }
-            else
-            {
-                CreateContact();
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            }
             driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
             return this;
         }
@@ -103,6 +85,7 @@ namespace addressbook_web_test
             contact.Mobile = "+791111111";
             FillContactData(contact)
                         .AddContactSubmit();
+            manager.Navigator.HomePage();
             return this;
         }
     }

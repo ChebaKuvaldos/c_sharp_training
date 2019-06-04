@@ -44,22 +44,8 @@ namespace addressbook_web_test
             return this;
         }
 
-
         public GroupHelper SelectGroup(int index)
-        {
-            if (IsElementPresent(By.XPath("(//input [@name='selected[]'])[" + index + "]")))
-            {
-                return this;
-            } 
-            else
-            {
-                InitNewGroupCreation();
-                Class2_GroupData group = new Class2_GroupData("Group");
-                group.Header = "For";
-                group.Footer = "DeleteOrModify";
-                FillGroupForm(group);
-                SubmitGroupCreation(); 
-            }
+        {           
             driver.FindElement(By.XPath("(//input [@name='selected[]'])[" + index + "]")).Click();
             return this;
         }

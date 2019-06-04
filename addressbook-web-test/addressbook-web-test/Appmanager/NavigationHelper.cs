@@ -38,10 +38,6 @@ namespace addressbook_web_test
             return this;
         }
 
-        public NavigationHelper Logout()
-        {
-            driver.FindElement(By.LinkText("Logout")).Click();
-            return this;
-        }
+
     }
 }

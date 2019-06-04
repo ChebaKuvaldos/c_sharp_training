@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace addressbook_web_test
 {
@@ -13,6 +14,11 @@ namespace addressbook_web_test
         public void RemoveContactTest()
         {
             app.Navigator.HomePage();
+            if (app.Contacts.IsElementPresent(By.CssSelector("img[alt=\"Edit\"]"))) { }
+            else
+            {
+                app.Contacts.CreateContact();
+            };
             app.Contacts.SelectContact(1)
                       .DeleteSelectedContact();
             app.Driver.SwitchTo().Alert().Accept();
