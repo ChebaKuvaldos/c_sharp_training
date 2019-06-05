@@ -14,7 +14,7 @@ namespace addressbook_web_test
         {
             app.Navigator.HomePage();
             app.Contacts.CreateContact();
-            app.Auth.Logout();
+       
         }
     }
 }

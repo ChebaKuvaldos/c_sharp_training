@@ -18,14 +18,11 @@ namespace addressbook_web_test
             contact.Firstname = "Croopper";
             contact.Lastname = null;
             contact.Mobile = null;
-            if (app.Contacts.IsElementPresent(By.CssSelector("img[alt=\"Edit\"]"))) { }
-            else
-            {
-                app.Contacts.CreateContact();
-            };
+            app.Contacts.ContactExist();
             app.Contacts.EditContact()
                         .FillContactData(contact)
                         .UpdateContact();
+      
         }
     }
 }

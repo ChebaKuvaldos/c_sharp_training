@@ -17,7 +17,14 @@ namespace addressbook_web_test
         {
         }
 
-
+        internal void ContactExist()
+        {
+            if (IsElementPresent(By.CssSelector("img[alt=\"Edit\"]"))) { }
+            else
+            {
+                CreateContact();
+            };
+        }
 
         public ContactHelper FillContactData(Class3_ContactData contact)
         {

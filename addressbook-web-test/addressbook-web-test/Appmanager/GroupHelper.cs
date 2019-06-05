@@ -70,6 +70,17 @@ namespace addressbook_web_test
             manager.Navigator.GroupsPage();
             return this;
         }
-
+        public GroupHelper GroupExist()
+        {
+            if (IsElementPresent((By.XPath("(//input [@name='selected[]'])['1']")))) { }
+            else
+            {
+                Class2_GroupData ifgroup = new Class2_GroupData("group");
+                ifgroup.Header = "for";
+                ifgroup.Footer = "meteor";
+                Create(ifgroup);
+            };
+            return this;
+        }
     }
 }

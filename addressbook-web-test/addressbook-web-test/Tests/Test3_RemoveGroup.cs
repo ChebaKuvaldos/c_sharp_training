@@ -15,14 +15,7 @@ namespace addressbook_web_test
         {
             app.Navigator.GroupsPage();
 
-            if (app.Groups.IsElementPresent((By.XPath("(//input [@name='selected[]'])['1']")))) { }
-            else
-            {
-                Class2_GroupData ifgroup = new Class2_GroupData("group");
-                ifgroup.Header = "for";
-                ifgroup.Footer = "meteor";
-                app.Groups.Create(ifgroup);
-            };
+            app.Groups.GroupExist();
 
             app.Groups.SelectGroup(1)
                       .DeleteSelectedGroup();

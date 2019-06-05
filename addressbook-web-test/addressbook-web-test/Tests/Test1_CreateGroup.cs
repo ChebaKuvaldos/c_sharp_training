@@ -20,7 +20,7 @@ namespace addressbook_web_test
 
             app.Groups.Create(group);
 
-            app.Auth.Logout();
+   
 
 
         }
@@ -34,7 +34,7 @@ namespace addressbook_web_test
 
             app.Groups.Create(group);
 
-            app.Auth.Logout();
+
         }
     }
 }
