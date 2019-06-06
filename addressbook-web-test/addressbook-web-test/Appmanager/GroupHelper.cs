@@ -24,6 +24,18 @@ namespace addressbook_web_test
             return this;
         }
 
+        public List<Class2_GroupData> GetGroupList()
+        {
+            List<Class2_GroupData> groups = new List<Class2_GroupData>();
+            manager.Navigator.GroupsPage();
+           ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new Class2_GroupData(element.Text));
+            }
+            return groups;
+        }
+
         public GroupHelper InitNewGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
