@@ -21,7 +21,7 @@ namespace addressbook_web_test
         {
             if (IsLoggedIn())
             {
-                if (IsLoggedIn(account))
+                if (IsLoggedIn())
                 {
                     return this;
                 }
@@ -37,23 +37,21 @@ namespace addressbook_web_test
         public bool IsLoggedIn(Class1_AccountData account)
         {
             return IsLoggedIn()
-                && driver.FindElement(By.Name("Logout")).FindElement(By.TagName("b")).Text
+                && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text
                 == "(" + account.Username + ")";
         }
 
         public bool IsLoggedIn()
         {
-            return IsElementPresent(By.Name("Logout"));
+            return IsElementPresent(By.Name("logout"));
         }
 
         public void Logout()
         {
             if (IsLoggedIn())
             {
-                driver.FindElement(By.LinkText("Logout")).Click();
-                driver.FindElement(By.Name("user"));
+                driver.FindElement(By.Name("logout")).Click(); 
             }
-
         }
     }
 }

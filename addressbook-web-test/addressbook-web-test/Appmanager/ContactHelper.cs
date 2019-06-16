@@ -17,15 +17,43 @@ namespace addressbook_web_test
         {
         }
 
-        internal void ContactExist()
+
+        public void ContactExist()
         {
             if (IsElementPresent(By.CssSelector("img[alt=\"Edit\"]"))) { }
             else
             {
-                CreateContact();
+                Class3_ContactData ifcontact = new Class3_ContactData("Petya", "Dude");
+                ifcontact.Mobile = "+791111111";
+                CreateContact(ifcontact);
             };
         }
-
+        /*    public List<Class3_ContactData> GetContactsList()
+            {
+                List<Class3_ContactData> contacts = new List<Class3_ContactData>();
+                manager.Navigator.HomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement element in elements)
+                {
+                    Class3_ContactData contact = 
+                        new Class3_ContactData(element.FindElement(By.XPath(".//td[3]")).Text, 
+                        element.FindElement(By.XPath(".//td[2]")).Text);
+                }
+                return contacts;
+            }
+    */
+        public List<Class3_ContactData> GetContactsList()
+        {
+            List<Class3_ContactData> contacts = new List<Class3_ContactData>();
+            manager.Navigator.HomePage();
+            ICollection<IWebElement> list = driver.FindElements(By.Name("entry"));
+            foreach (IWebElement item in list)
+            {
+                contacts.Add(new Class3_ContactData(item.FindElement(By.XPath(".//td[3]")).Text, 
+                    item.FindElement(By.XPath(".//td[2]")).Text));
+            }
+            return contacts;
+        }
         public ContactHelper FillContactData(Class3_ContactData contact)
         {
             Type(By.Name("firstname"), contact.Firstname);
@@ -51,7 +79,7 @@ namespace addressbook_web_test
             return this;
         }
 
-        internal ContactHelper UpdateContact()
+        public ContactHelper UpdateContact()
         {
             driver.FindElement(By.Name("update")).Click();
             return this;
@@ -64,7 +92,7 @@ namespace addressbook_web_test
         }
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("(//input [@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input [@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -83,17 +111,23 @@ namespace addressbook_web_test
             driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
             return this;
         }
-        public ContactHelper CreateContact()
+        public ContactHelper CreateContact(Class3_ContactData contact)
         {
             InitAddContact();
-            Class3_ContactData contact = new Class3_ContactData();
-            contact.Firstname = "Petya";
-            contact.Lastname = "Dude";
-            contact.Mobile = "+791111111";
             FillContactData(contact)
                         .AddContactSubmit();
             manager.Navigator.HomePage();
             return this;
         }
+        public void RemoveContact(int v)
+        {
+            manager.Navigator.HomePage();
+            ContactExist();
+            SelectContact(0)
+                      .DeleteSelectedContact();
+            manager.Driver.SwitchTo().Alert().Accept();
+            manager.Navigator.HomePage();
+        }
+
     }
 }

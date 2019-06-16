@@ -20,11 +20,12 @@ namespace addressbook_web_test
             group.Footer = "Good";
 
             List<Class2_GroupData> oldGroups = app.Groups.GetGroupList();
-
             app.Groups.Create(group);
-
             List<Class2_GroupData> newGroups = app.Groups.GetGroupList();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
         [Test]
         public void CreateEmptyGroup()
@@ -34,11 +35,12 @@ namespace addressbook_web_test
             group.Header = "";
             group.Footer = "";
             List<Class2_GroupData> oldGroups = app.Groups.GetGroupList();
-
             app.Groups.Create(group);
-
             List<Class2_GroupData> newGroups = app.Groups.GetGroupList();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
         [Test]
         public void CreateBadNameGroup()
@@ -49,12 +51,13 @@ namespace addressbook_web_test
             group.Footer = "Good";
 
             List<Class2_GroupData> oldGroups = app.Groups.GetGroupList();
-
             app.Groups.Create(group);
-
             List<Class2_GroupData> newGroups = app.Groups.GetGroupList();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
-        
+           // oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+
         }
 
     }

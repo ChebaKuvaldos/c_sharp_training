@@ -22,17 +22,18 @@ namespace addressbook_web_test
             app.Auth.Login(account);
 
             Assert.IsTrue(app.Auth.IsLoggedIn(account));
-  
+
+
         }
         [Test]
         public void LoginWithInValidCredentials()
         {
             app.Auth.Logout();
-            Class1_AccountData account = new Class1_AccountData("admin", "12345");
+            Class1_AccountData account = new Class1_AccountData("0000", "12345");
             app.Auth.Login(account);
 
             Assert.IsFalse(app.Auth.IsLoggedIn(account));
-
+  
         }
     }
 }

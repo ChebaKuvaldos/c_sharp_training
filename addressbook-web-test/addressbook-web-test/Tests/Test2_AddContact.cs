@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace addressbook_web_test
@@ -12,9 +13,16 @@ namespace addressbook_web_test
         [Test]
         public void TheAddContactTest()
         {
+            Class3_ContactData contact = new Class3_ContactData("Miss", "Where");
+            contact.Mobile = "+791111111";
             app.Navigator.HomePage();
-            app.Contacts.CreateContact();
-       
+
+            List<Class3_ContactData> oldContact = app.Contacts.GetContactsList();
+            app.Contacts.CreateContact(contact);
+            List<Class3_ContactData> newContact = app.Contacts.GetContactsList();
+            oldContact.Add(contact);
+            Assert.AreEqual(oldContact, newContact);
+
         }
-    }
+        }
 }

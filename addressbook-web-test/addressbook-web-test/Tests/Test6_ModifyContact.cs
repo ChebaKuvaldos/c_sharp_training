@@ -14,7 +14,7 @@ namespace addressbook_web_test
         public void ModifyContactTest()
         {
             app.Navigator.HomePage();
-            Class3_ContactData contact = new Class3_ContactData();
+            Class3_ContactData contact = new Class3_ContactData("Croopper", null);
             contact.Firstname = "Croopper";
             contact.Lastname = null;
             contact.Mobile = null;

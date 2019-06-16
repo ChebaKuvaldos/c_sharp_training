@@ -36,6 +36,15 @@ namespace addressbook_web_test
             return groups;
         }
 
+        internal void ModifyGroup(int v, Class2_GroupData newData)
+        {
+                GroupExist()
+                .SelectGroup(v)
+                .ModifySelectedGroup()
+                .FillGroupForm(newData)
+                .UpdateGroup(); 
+        }
+
         public GroupHelper InitNewGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
@@ -56,9 +65,16 @@ namespace addressbook_web_test
             return this;
         }
 
+        public GroupHelper RemoveGroup(int g)
+        {
+            SelectGroup(g);
+            DeleteSelectedGroup();
+            return this;
+        }
+
         public GroupHelper SelectGroup(int index)
         {           
-            driver.FindElement(By.XPath("(//input [@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input [@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -94,5 +110,6 @@ namespace addressbook_web_test
             };
             return this;
         }
+
     }
 }
