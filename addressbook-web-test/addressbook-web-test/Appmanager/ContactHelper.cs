@@ -18,6 +18,7 @@ namespace addressbook_web_test
         }
 
 
+
         public void ContactExist()
         {
             if (IsElementPresent(By.CssSelector("img[alt=\"Edit\"]"))) { }
@@ -28,20 +29,7 @@ namespace addressbook_web_test
                 CreateContact(ifcontact);
             };
         }
-        /*    public List<Class3_ContactData> GetContactsList()
-            {
-                List<Class3_ContactData> contacts = new List<Class3_ContactData>();
-                manager.Navigator.HomePage();
-                ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
-                foreach (IWebElement element in elements)
-                {
-                    Class3_ContactData contact = 
-                        new Class3_ContactData(element.FindElement(By.XPath(".//td[3]")).Text, 
-                        element.FindElement(By.XPath(".//td[2]")).Text);
-                }
-                return contacts;
-            }
-    */
+
         public List<Class3_ContactData> GetContactsList()
         {
             List<Class3_ContactData> contacts = new List<Class3_ContactData>();
@@ -49,7 +37,7 @@ namespace addressbook_web_test
             ICollection<IWebElement> list = driver.FindElements(By.Name("entry"));
             foreach (IWebElement item in list)
             {
-                contacts.Add(new Class3_ContactData(item.FindElement(By.XPath(".//td[3]")).Text, 
+               contacts.Add(new Class3_ContactData(item.FindElement(By.XPath(".//td[3]")).Text, 
                     item.FindElement(By.XPath(".//td[2]")).Text));
             }
             return contacts;
@@ -123,11 +111,19 @@ namespace addressbook_web_test
         {
             manager.Navigator.HomePage();
             ContactExist();
-            SelectContact(0)
+            SelectContact(v)
                       .DeleteSelectedContact();
-            manager.Driver.SwitchTo().Alert().Accept();
+            driver.SwitchTo().Alert().Accept();
             manager.Navigator.HomePage();
-        }
 
+        }
+        public void ModifyContact(Class3_ContactData data)
+        {
+            manager.Navigator.HomePage();
+            ContactExist();
+            EditContact()
+                        .FillContactData(data)
+                        .UpdateContact(); ;
+        }
     }
 }

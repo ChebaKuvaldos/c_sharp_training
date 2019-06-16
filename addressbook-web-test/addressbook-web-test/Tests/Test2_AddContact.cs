@@ -13,7 +13,7 @@ namespace addressbook_web_test
         [Test]
         public void TheAddContactTest()
         {
-            Class3_ContactData contact = new Class3_ContactData("Miss", "Where");
+            Class3_ContactData contact = new Class3_ContactData("kumis","kronsteine");
             contact.Mobile = "+791111111";
             app.Navigator.HomePage();
 
@@ -21,6 +21,8 @@ namespace addressbook_web_test
             app.Contacts.CreateContact(contact);
             List<Class3_ContactData> newContact = app.Contacts.GetContactsList();
             oldContact.Add(contact);
+            oldContact.Sort();
+            newContact.Sort();
             Assert.AreEqual(oldContact, newContact);
 
         }

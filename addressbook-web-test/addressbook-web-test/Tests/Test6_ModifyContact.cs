@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -13,16 +14,17 @@ namespace addressbook_web_test
         [Test]
         public void ModifyContactTest()
         {
-            app.Navigator.HomePage();
-            Class3_ContactData contact = new Class3_ContactData("Croopper", null);
-            contact.Firstname = "Croopper";
-            contact.Lastname = null;
-            contact.Mobile = null;
-            app.Contacts.ContactExist();
-            app.Contacts.EditContact()
-                        .FillContactData(contact)
-                        .UpdateContact();
-      
+            Class3_ContactData data = new Class3_ContactData("Croopper", null);
+            data.Firstname = "Croopper";
+            data.Lastname = null;
+            data.Mobile = null;
+            List<Class3_ContactData> oldContact = app.Contacts.GetContactsList();
+            app.Contacts.ModifyContact(data);
+            List<Class3_ContactData> newContact = app.Contacts.GetContactsList();
+            oldContact[0].Firstname = data.Firstname;
+            oldContact.Sort();
+            newContact.Sort();
+            Assert.AreEqual(oldContact, newContact);
         }
     }
 }

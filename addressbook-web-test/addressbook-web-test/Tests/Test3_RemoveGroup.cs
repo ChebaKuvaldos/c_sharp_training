@@ -22,6 +22,8 @@ namespace addressbook_web_test
             List<Class2_GroupData> newGroups = app.Groups.GetGroupList();
 
             oldGroups.RemoveAt(0);
+            oldGroups.Sort();
+            newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
         }
     }
