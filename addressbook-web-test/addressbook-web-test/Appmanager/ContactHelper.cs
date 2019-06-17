@@ -110,10 +110,13 @@ namespace addressbook_web_test
         public void RemoveContact(int v)
         {
             manager.Navigator.HomePage();
-            ContactExist();
+           // ContactExist();
             SelectContact(v)
                       .DeleteSelectedContact();
             driver.SwitchTo().Alert().Accept();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
+            driver.FindElement(By.CssSelector("div.msgbox"));
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             manager.Navigator.HomePage();
 
         }

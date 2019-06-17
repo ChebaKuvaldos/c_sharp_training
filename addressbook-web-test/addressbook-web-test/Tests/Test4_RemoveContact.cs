@@ -14,7 +14,8 @@ namespace addressbook_web_test
         [Test]
         public void RemoveContactTest()
         {
-            List<Class3_ContactData> oldContact = app.Contacts.GetContactsList();
+            app.Contacts.ContactExist();
+            List<Class3_ContactData> oldContact = app.Contacts.GetContactsList();         
             app.Contacts.RemoveContact(0);
             List<Class3_ContactData> newContact = app.Contacts.GetContactsList();
             oldContact.RemoveAt(0);
