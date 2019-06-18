@@ -110,7 +110,6 @@ namespace addressbook_web_test
         public void RemoveContact(int v)
         {
             manager.Navigator.HomePage();
-           // ContactExist();
             SelectContact(v)
                       .DeleteSelectedContact();
             driver.SwitchTo().Alert().Accept();

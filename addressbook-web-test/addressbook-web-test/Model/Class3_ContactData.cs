@@ -49,12 +49,11 @@ namespace addressbook_web_test
             {
                 return 1;
             }
-            //return Firstname.CompareTo(other.Firstname) + Lastname.CompareTo(other.Lastname);
-            if (Lastname.CompareTo(other.Lastname) == 1)
+            if (Lastname.CompareTo(other.Lastname) == Lastname.CompareTo(other.Lastname))
             {
                 return Firstname.CompareTo(other.Firstname);
             }
-            return 1;
+            return Lastname.CompareTo(other.Lastname);
         }
 
         public string Firstname { get; set; }
