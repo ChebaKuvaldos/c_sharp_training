@@ -17,31 +17,25 @@ namespace addressbook_web_test
         {
         }
 
-
-
-        public void ContactExist()
-        {
-            if (IsElementPresent(By.CssSelector("img[alt=\"Edit\"]"))) { }
-            else
-            {
-                Class3_ContactData ifcontact = new Class3_ContactData("Petya", "Dude");
-                ifcontact.Mobile = "+791111111";
-                CreateContact(ifcontact);
-            };
-        }
+        private List<Class3_ContactData> contactCache = null;
 
         public List<Class3_ContactData> GetContactsList()
         {
-            List<Class3_ContactData> contacts = new List<Class3_ContactData>();
+            if (contactCache == null)
+            {
+                contactCache = new List<Class3_ContactData>();
             manager.Navigator.HomePage();
             ICollection<IWebElement> list = driver.FindElements(By.Name("entry"));
             foreach (IWebElement item in list)
             {
-               contacts.Add(new Class3_ContactData(item.FindElement(By.XPath(".//td[3]")).Text, 
+                    contactCache.Add(new Class3_ContactData(item.FindElement(By.XPath(".//td[3]")).Text, 
                     item.FindElement(By.XPath(".//td[2]")).Text));
             }
-            return contacts;
+                return contactCache;
+            }
+            return new List<Class3_ContactData>(contactCache);
         }
+
         public ContactHelper FillContactData(Class3_ContactData contact)
         {
             Type(By.Name("firstname"), contact.Firstname);
@@ -70,14 +64,17 @@ namespace addressbook_web_test
         public ContactHelper UpdateContact()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 
         public ContactHelper AddContactSubmit()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            contactCache = null;
             return this;
         }
+
         public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("(//input [@name='selected[]'])[" + (index + 1) + "]")).Click();
@@ -87,18 +84,33 @@ namespace addressbook_web_test
         public ContactHelper DeleteSelectedContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache = null;
             return this;
         }
+
         public ContactHelper InitAddContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
         }
+
         public ContactHelper EditContact()
         {
             driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
             return this;
         }
+
+        public void ContactExist()
+        {
+            if (IsElementPresent(By.CssSelector("img[alt=\"Edit\"]"))) { }
+            else
+            {
+                Class3_ContactData ifcontact = new Class3_ContactData("Petya", "Dude");
+                ifcontact.Mobile = "+791111111";
+                CreateContact(ifcontact);
+            };
+        }
+
         public ContactHelper CreateContact(Class3_ContactData contact)
         {
             InitAddContact();
@@ -107,6 +119,7 @@ namespace addressbook_web_test
             manager.Navigator.HomePage();
             return this;
         }
+
         public void RemoveContact(int v)
         {
             manager.Navigator.HomePage();
@@ -119,6 +132,7 @@ namespace addressbook_web_test
             manager.Navigator.HomePage();
 
         }
+
         public void ModifyContact(Class3_ContactData data)
         {
             manager.Navigator.HomePage();

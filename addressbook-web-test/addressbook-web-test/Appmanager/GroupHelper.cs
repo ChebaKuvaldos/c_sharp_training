@@ -18,42 +18,28 @@ namespace addressbook_web_test
         {
         }
 
-        public GroupHelper ModifySelectedGroup()
-        {
-            driver.FindElement(By.Name("edit")).Click();
-            return this;
-        }
+        private List<Class2_GroupData> groupCache = null;
 
         public List<Class2_GroupData> GetGroupList()
         {
-            List<Class2_GroupData> groups = new List<Class2_GroupData>();
-            manager.Navigator.GroupsPage();
-           ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
-            foreach (IWebElement element in elements)
+            if (groupCache == null)
             {
-                groups.Add(new Class2_GroupData(element.Text));
+                groupCache = new List<Class2_GroupData>();
+                
+                manager.Navigator.GroupsPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+                foreach (IWebElement element in elements)
+                {
+                    groupCache.Add(new Class2_GroupData(element.Text));
+                }
+                return groupCache;
             }
-            return groups;
-        }
-
-        internal void ModifyGroup(int v, Class2_GroupData newData)
-        {
-                GroupExist()
-                .SelectGroup(v)
-                .ModifySelectedGroup()
-                .FillGroupForm(newData)
-                .UpdateGroup(); 
+            return new List<Class2_GroupData>(groupCache);
         }
 
         public GroupHelper InitNewGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
-            return this;
-        }
-
-        public GroupHelper UpdateGroup()
-        {
-            driver.FindElement(By.Name("update")).Click();
             return this;
         }
 
@@ -65,30 +51,39 @@ namespace addressbook_web_test
             return this;
         }
 
-        public GroupHelper RemoveGroup(int g)
-        {
-            SelectGroup(g);
-            DeleteSelectedGroup();
-            return this;
-        }
-
         public GroupHelper SelectGroup(int index)
         {           
             driver.FindElement(By.XPath("(//input [@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
+        public GroupHelper ModifySelectedGroup()
+        {
+            driver.FindElement(By.Name("edit")).Click();
+            return this;
+        }
+
         public GroupHelper DeleteSelectedGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
+            groupCache = null;
             return this;
         }
 
         public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            groupCache = null;
             return this;
         }
+
+        public GroupHelper UpdateGroup()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            groupCache = null;
+            return this;
+        }
+
         public GroupHelper Create(Class2_GroupData group)
         {
             manager.Navigator.GroupsPage();
@@ -98,6 +93,7 @@ namespace addressbook_web_test
             manager.Navigator.GroupsPage();
             return this;
         }
+
         public GroupHelper GroupExist()
         {
             if (IsElementPresent((By.XPath("(//input [@name='selected[]'])['1']")))) { }
@@ -111,5 +107,20 @@ namespace addressbook_web_test
             return this;
         }
 
+        public GroupHelper RemoveGroup(int g)
+        {
+            SelectGroup(g);
+            DeleteSelectedGroup();
+            return this;
+        }
+
+        public void ModifyGroup(int v, Class2_GroupData newData)
+        {
+            GroupExist()
+            .SelectGroup(v)
+            .ModifySelectedGroup()
+            .FillGroupForm(newData)
+            .UpdateGroup();
+        }
     }
 }
