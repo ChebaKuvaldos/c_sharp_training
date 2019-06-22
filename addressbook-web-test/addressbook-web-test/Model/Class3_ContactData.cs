@@ -8,11 +8,15 @@ namespace addressbook_web_test
 {
     public class Class3_ContactData : IEquatable<Class3_ContactData>, IComparable<Class3_ContactData>
     {
+        
+
         public Class3_ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
             Lastname = lastname;
         }
+
+        public string allPhones;
 
         public bool Equals(Class3_ContactData other)
         {
@@ -70,11 +74,36 @@ namespace addressbook_web_test
 
         public string Address { get; set; }
 
-        public string Home { get; set; }
+        public string HomePhone { get; set; }
 
-        public string Mobile { get; set; }
+        public string MobilePhone { get; set; }
 
-        public string Work { get; set; }
+        public string WorkPhone { get; set; }
+
+        public string AllPhones { get
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
+                }
+            }
+             set
+            {
+                allPhones = value;
+            } }
+        private string CleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return phone.Replace(" ", "").Replace("(", "").Replace(")","").Replace("-", "") + "\r\n";
+
+        }
 
         public string Fax { get; set; }
 

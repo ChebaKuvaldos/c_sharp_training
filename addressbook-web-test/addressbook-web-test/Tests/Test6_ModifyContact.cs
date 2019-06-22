@@ -17,7 +17,7 @@ namespace addressbook_web_test
             Class3_ContactData data = new Class3_ContactData("Croopper", null);
             data.Firstname = "Croopper";
             data.Lastname = null;
-            data.Mobile = null;
+            data.MobilePhone = null;
             List<Class3_ContactData> oldContact = app.Contacts.GetContactsList();
             app.Contacts.ModifyContact(data);
             List<Class3_ContactData> newContact = app.Contacts.GetContactsList();

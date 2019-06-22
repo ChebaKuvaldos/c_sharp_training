@@ -36,6 +36,44 @@ namespace addressbook_web_test
             return new List<Class3_ContactData>(contactCache);
         }
 
+        public Class3_ContactData GetContactInformationFromTable(int index)
+        {
+            manager.Navigator.HomePage();
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"));
+            string lastname = cells[1].Text;
+            string firstname = cells[2].Text;
+            string address = cells[3].Text;
+            string allPhones = cells[5].Text;
+
+            return new Class3_ContactData(firstname, lastname)
+            {
+                Address = address,
+                AllPhones = allPhones,
+            };
+        }
+
+        public Class3_ContactData GetContactInformationFromEditForm(int index)
+        {
+            manager.Navigator.HomePage();
+            EditContact(0);
+            string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+
+            return new Class3_ContactData(firstname, lastname)
+            {
+                Address = address,
+                HomePhone = homePhone,
+                MobilePhone = mobilePhone,
+                WorkPhone = workPhone,
+            };
+                
+        }
+
         public ContactHelper FillContactData(Class3_ContactData contact)
         {
             Type(By.Name("firstname"), contact.Firstname);
@@ -45,9 +83,9 @@ namespace addressbook_web_test
             Type(By.Name("title"), contact.Title);
             Type(By.Name("company"), contact.Company);
             Type(By.Name("address"), contact.Address);
-            Type(By.Name("home"), contact.Home);
-            Type(By.Name("mobile"), contact.Mobile);
-            Type(By.Name("work"), contact.Work);
+            Type(By.Name("home"), contact.HomePhone);
+            Type(By.Name("mobile"), contact.MobilePhone);
+            Type(By.Name("work"), contact.WorkPhone);
             Type(By.Name("fax"), contact.Fax);
             Type(By.Name("email"), contact.Email);
             Type(By.Name("email2"), contact.Email2);
@@ -94,9 +132,11 @@ namespace addressbook_web_test
             return this;
         }
 
-        public ContactHelper EditContact()
+        public ContactHelper EditContact(int index)
         {
-            driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[7]
+                .FindElement(By.TagName("a")).Click();
             return this;
         }
 
@@ -106,7 +146,7 @@ namespace addressbook_web_test
             else
             {
                 Class3_ContactData ifcontact = new Class3_ContactData("Petya", "Dude");
-                ifcontact.Mobile = "+791111111";
+                ifcontact.MobilePhone = "+791111111";
                 CreateContact(ifcontact);
             };
         }
@@ -137,7 +177,7 @@ namespace addressbook_web_test
         {
             manager.Navigator.HomePage();
             ContactExist();
-            EditContact()
+            EditContact(0)
                         .FillContactData(data)
                         .UpdateContact(); ;
         }
