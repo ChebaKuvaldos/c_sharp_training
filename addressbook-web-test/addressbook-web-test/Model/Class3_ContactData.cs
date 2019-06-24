@@ -3,20 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace addressbook_web_test
 {
     public class Class3_ContactData : IEquatable<Class3_ContactData>, IComparable<Class3_ContactData>
     {
-        
+
+        public Class3_ContactData()
+        {
+        }
 
         public Class3_ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
             Lastname = lastname;
         }
+        public Class3_ContactData(string contactInfo)
+        {
+            ContactInfo = contactInfo;
+        }
 
         public string allPhones;
+        public string contactInfo;
 
         public bool Equals(Class3_ContactData other)
         {
@@ -101,7 +110,7 @@ namespace addressbook_web_test
             {
                 return "";
             }
-            return phone.Replace(" ", "").Replace("(", "").Replace(")","").Replace("-", "") + "\r\n";
+            return Regex.Replace(phone, "[ ()-]","") + "\r\n";
 
         }
 
@@ -112,6 +121,12 @@ namespace addressbook_web_test
         public string Email2 { get; set; }
 
         public string Homepage { get; set; }
+        
+        public string Birthday { get; set; }
+
+        public string Bday { get; set; }
+
+        public string Bmonth { get; set; }
 
         public string Byear { get; set; }
 
@@ -120,6 +135,89 @@ namespace addressbook_web_test
         public string Phone2 { get; set; }
 
         public string Notes { get; set; }
+        
+        public string ContactInfo
+        {
+            get
+            {
+                if (contactInfo != null)
+                {
+                    return contactInfo;
+                }
+                else
+                {
+                    contactInfo = "";
+
+                    if (Firstname != "")
+                    {
+                        contactInfo += Firstname + " ";
+                    }
+
+                    if (Lastname != "")
+                    {
+                        contactInfo += Lastname + "\r\n";
+                    }
+
+                    if (Address != "")
+                    {
+                        contactInfo += Address + "\r\n\r\n";
+                    }
+
+                    if (HomePhone != "")
+                    {
+                        contactInfo += "H: " + CleanUp(HomePhone);
+                    }
+
+                    if (MobilePhone != "")
+                    {
+                        contactInfo += "M: " + CleanUp(MobilePhone);
+                    }
+
+                    if (WorkPhone != "")
+                    {
+                        contactInfo += "W: " + CleanUp(WorkPhone);
+                    }
+
+                    if (Email != "")
+                    {
+                        contactInfo += Email + "\r\n";
+                    }
+
+                    if (Email2 != "")
+                    {
+                        contactInfo += Email2 + "\r\n";
+                    }
+                    if (Birthday != "")
+                    {
+                        contactInfo += "\r\n" + Birthday;
+                    }
+                    else Birthday = null;
+                    if (Bday != "")
+                    {
+                        contactInfo += "\r\n" + Bday;
+                    }
+                    else Bmonth = null;
+                    if (Byear != "")
+                    {
+                        contactInfo += "\r\n" + Bmonth;
+                    }
+                    else Byear = null;
+                    if (Byear != "")
+                    {
+                        contactInfo += "\r\n" + Byear;
+                    }
+                    else Byear = null; 
+                    return contactInfo.Trim();
+
+                }
+            }
+
+        
+        set
+            {
+                contactInfo = value;
+            }
+        }
 
 
     }

@@ -14,7 +14,7 @@ namespace addressbook_web_test
     public class Test8_ContactInformationTest : AuthTestBase
     {
         [Test]
-        public void ContactInformationTest()
+        public void ContactInfoHomeToEdit()
         {
            Class3_ContactData fromTable = app.Contacts.GetContactInformationFromTable(0);
            Class3_ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
@@ -22,6 +22,15 @@ namespace addressbook_web_test
             Assert.AreEqual(fromTable, fromForm);
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
+        }
+        [Test]
+        public void ContactInfoPropertyToEdit()
+        {
+            Class3_ContactData fromProperty = app.Contacts.GetContactInformationFromProperty(0);
+            Class3_ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
+
+            Assert.AreEqual(fromProperty.ContactInfo, fromForm.ContactInfo);
+
         }
     }
 }
