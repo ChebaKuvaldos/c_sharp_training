@@ -10,16 +10,24 @@ namespace addressbook_web_test
     [TestFixture]
     public class AddContact : AuthTestBase
     {
-        [Test]
-        public void TheAddContactTest()
+        public static IEnumerable<Class3_ContactData> RandomContactDataProvider()
         {
-            Class3_ContactData contact = new Class3_ContactData("Negodyai","Vanya");
-            contact.Address = "St.Paulostan,CocoStr,543";
-            contact.MobilePhone = "+791111111";
-            contact.HomePhone = "11";
-            contact.WorkPhone = "+3333333";
-            app.Navigator.HomePage();
-
+            List<Class3_ContactData> groups = new List<Class3_ContactData>();
+            for (int i = 0; i < 5; i++)
+            {
+                groups.Add(new Class3_ContactData(GenerateRandomString(30), GenerateRandomString(30))
+                {
+                    Address = GenerateRandomString(150),
+                    MobilePhone = GenerateRandomString(10),
+                    HomePhone = GenerateRandomString(10),
+                    WorkPhone = GenerateRandomString(10),
+                });
+            }
+            return groups;
+        }
+        [Test, TestCaseSource("RandomContactDataProvider")]
+        public void TheAddContactTest(Class3_ContactData contact)
+        {
             List<Class3_ContactData> oldContact = app.Contacts.GetContactsList();
             app.Contacts.CreateContact(contact);
             List<Class3_ContactData> newContact = app.Contacts.GetContactsList();
