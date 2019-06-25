@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.IO;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -24,7 +25,25 @@ namespace addressbook_web_test
             }
             return groups;
         }
-        [Test, TestCaseSource("RandomGroupDataProvider")]
+
+        public static IEnumerable<Class2_GroupData> GroupDataFromFile()
+        {
+            List<Class2_GroupData> groups = new List<Class2_GroupData>();
+            string[] lines = File.ReadAllLines(@"group.csv");
+            foreach (string l in lines)
+            {
+                string[] parts = l.Split(',');
+                groups.Add(new Class2_GroupData(parts[0])
+                {
+                    Header = parts[1],
+                    Footer = parts[2]
+
+                });
+            };
+            return groups;
+        }
+
+        [Test, TestCaseSource("GroupDataFromFile")]
         public void CreateGroup(Class2_GroupData group)
         {
             app.Navigator.GroupsPage();

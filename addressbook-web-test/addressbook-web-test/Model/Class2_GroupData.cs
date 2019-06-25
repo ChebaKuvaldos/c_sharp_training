@@ -8,6 +8,10 @@ namespace addressbook_web_test
 {
     public class Class2_GroupData : IEquatable<Class2_GroupData>, IComparable<Class2_GroupData>
     {
+        public Class2_GroupData()
+        { 
+        }
+
         public Class2_GroupData(string name)
         {
             Name = name;
