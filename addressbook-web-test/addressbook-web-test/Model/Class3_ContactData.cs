@@ -25,6 +25,7 @@ namespace addressbook_web_test
         }
 
         public string allPhones;
+        public string allEmails;
         public string contactInfo;
 
         public bool Equals(Class3_ContactData other)
@@ -120,6 +121,38 @@ namespace addressbook_web_test
 
         public string Email2 { get; set; }
 
+        public string Email3 { get; set; }
+
+        public string AllEmails
+        {
+            get
+            {
+                if (allPhones != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return (CleanEm(Email) + CleanEm(Email2) + CleanEm(Email3)).Trim();
+                }
+            }
+            set
+            {
+                allPhones = value;
+            }
+        }
+
+        private string CleanEm(string email)
+        {
+            if (email == null || email == "")
+            {
+                return "";
+            }
+            return email + "\r\n";
+
+        }
+        
+
         public string Homepage { get; set; }
         
         public string Birthday { get; set; }
@@ -175,7 +208,7 @@ namespace addressbook_web_test
 
                     if (WorkPhone != "")
                     {
-                        contactInfo += "W: " + CleanUp(WorkPhone);
+                        contactInfo += "W: " + CleanUp(WorkPhone) + "\r\n";
                     }
 
                     if (Email != "")
@@ -186,6 +219,10 @@ namespace addressbook_web_test
                     if (Email2 != "")
                     {
                         contactInfo += Email2 + "\r\n";
+                    }
+                    if (Email3 != "")
+                    {
+                        contactInfo += Email3 + "\r\n";
                     }
                     if (Birthday != "")
                     {

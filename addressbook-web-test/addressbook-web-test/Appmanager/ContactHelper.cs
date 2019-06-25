@@ -44,6 +44,7 @@ namespace addressbook_web_test
             string lastname = cells[1].Text;
             string firstname = cells[2].Text;
             string address = cells[3].Text;
+            string allEmails = cells[4].Text;
             string allPhones = cells[5].Text;
 
             return new Class3_ContactData(firstname, lastname)
@@ -65,6 +66,10 @@ namespace addressbook_web_test
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
             /*
             string bday = driver.FindElement(By.Name("byear")).GetAttribute("value");
             string bmonth = driver.FindElement(By.Name("byear")).GetAttribute("value");
@@ -79,7 +84,10 @@ namespace addressbook_web_test
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
                 WorkPhone = workPhone,
-               // Birthday = birthday, чето с birthday не срослось =С
+                Email = email,
+                Email2 = email2,
+                Email3 = email3
+                // Birthday = birthday, чето с birthday не срослось =С
             };
 
         }
