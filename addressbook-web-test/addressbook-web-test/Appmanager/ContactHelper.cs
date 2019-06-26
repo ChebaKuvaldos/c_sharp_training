@@ -51,10 +51,11 @@ namespace addressbook_web_test
             {
                 Address = address,
                 AllPhones = allPhones,
+                AllEmails = allEmails
             };
         }
 
-        public Class3_ContactData GetContactInformationFromEditForm(int index)
+        public Class3_ContactData GetContactInformationFromEditForm(int index, bool indx)
         {
             manager.Navigator.HomePage();
             EditContact(index);
@@ -77,19 +78,37 @@ namespace addressbook_web_test
             
             string birthday = "Birthday " + bday + ". " + bmonth + " " + byear;
             */
+            string allEmails = email + "\r\n" + email2 + "\r\n" + email3;
 
+            if (indx == true)
+            {
+                return new Class3_ContactData(firstname, lastname)
+                {
+                    Address = address,
+                    HomePhone = homePhone,
+                    MobilePhone = mobilePhone,
+                    WorkPhone = workPhone,
+
+                    Email = email,
+                    Email2 = email2,
+                    Email3 = email3,
+                    // AllEmails = allEmails
+                    // Birthday = birthday, чето с birthday не срослось =С
+                };
+            }
             return new Class3_ContactData(firstname, lastname)
             {
                 Address = address,
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
                 WorkPhone = workPhone,
-                Email = email,
-                Email2 = email2,
-                Email3 = email3
+                AllEmails = allEmails
+                // Email = email,
+                // Email2 = email2,
+                // Email3 = email3,
+
                 // Birthday = birthday, чето с birthday не срослось =С
             };
-
         }
 
         public Class3_ContactData GetContactInformationFromProperty(int index)
@@ -97,6 +116,7 @@ namespace addressbook_web_test
               manager.Navigator.HomePage();
               ContactProperty(index);
             string text = driver.FindElement(By.Id("content")).Text.Trim();
+            
             return new Class3_ContactData(text);
               
            }

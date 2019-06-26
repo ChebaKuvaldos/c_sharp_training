@@ -17,20 +17,20 @@ namespace addressbook_web_test
         public void ContactInfoHomeToEdit()
         {
            Class3_ContactData fromTable = app.Contacts.GetContactInformationFromTable(0);
-           Class3_ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
+           Class3_ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0, false);
 
             Assert.AreEqual(fromTable, fromForm);
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
+            Assert.AreEqual(fromTable.AllEmails, fromForm.AllEmails);
         }
         [Test]
         public void ContactInfoPropertyToEdit()
         {
             Class3_ContactData fromProperty = app.Contacts.GetContactInformationFromProperty(0);
-            Class3_ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
+            Class3_ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0, true);
 
             Assert.AreEqual(fromProperty.ContactInfo, fromForm.ContactInfo);
-
         }
     }
 }

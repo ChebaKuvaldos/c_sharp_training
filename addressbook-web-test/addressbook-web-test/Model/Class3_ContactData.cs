@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Xml.Serialization;
 using System.Text.RegularExpressions;
 
 namespace addressbook_web_test
 {
     public class Class3_ContactData : IEquatable<Class3_ContactData>, IComparable<Class3_ContactData>
     {
-
+        
         private string allPhones;
         private string allEmails;
         private string contactInfo;
@@ -91,7 +93,7 @@ namespace addressbook_web_test
         public string MobilePhone { get; set; }
 
         public string WorkPhone { get; set; }
-
+        [XmlIgnore, JsonIgnore]
         public string AllPhones { get
             {
                 if (allPhones != null)
@@ -124,12 +126,12 @@ namespace addressbook_web_test
         public string Email2 { get; set; }
 
         public string Email3 { get; set; }
-
+        [XmlIgnore, JsonIgnore]
         public string AllEmails
         {
             get
             {
-                if (allPhones != null)
+                if (allEmails != null)
                 {
                     return allEmails;
                 }
@@ -170,7 +172,7 @@ namespace addressbook_web_test
         public string Phone2 { get; set; }
 
         public string Notes { get; set; }
-        
+        [XmlIgnore, JsonIgnore]
         public string ContactInfo
         {
             get
@@ -205,7 +207,7 @@ namespace addressbook_web_test
 
                     if (MobilePhone != "")
                     {
-                        contactInfo += "M: " + CleanUp(MobilePhone);
+                        contactInfo += "M: " + CleanUp(MobilePhone) ;
                     }
 
                     if (WorkPhone != "")

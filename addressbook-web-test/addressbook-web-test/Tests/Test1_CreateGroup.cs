@@ -59,7 +59,7 @@ namespace addressbook_web_test
                 (File.ReadAllText(@"groups.json"));
         }
 
-        [Test, TestCaseSource("GroupDataFromJsonFile")]
+        [Test, TestCaseSource("GroupDataFromXmlFile")]
         public void CreateGroup(Class2_GroupData group)
         {
             app.Navigator.GroupsPage();
