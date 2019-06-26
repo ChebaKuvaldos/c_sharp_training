@@ -10,6 +10,10 @@ namespace addressbook_web_test
     public class Class3_ContactData : IEquatable<Class3_ContactData>, IComparable<Class3_ContactData>
     {
 
+        private string allPhones;
+        private string allEmails;
+        private string contactInfo;
+
         public Class3_ContactData()
         {
         }
@@ -24,9 +28,7 @@ namespace addressbook_web_test
             ContactInfo = contactInfo;
         }
 
-        public string allPhones;
-        public string allEmails;
-        public string contactInfo;
+
 
         public bool Equals(Class3_ContactData other)
         {
