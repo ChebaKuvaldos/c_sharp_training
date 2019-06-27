@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Collections.Generic;
 using NUnit.Framework;
-
+using System.Linq;
 
 namespace addressbook_web_test
 {
@@ -88,6 +88,19 @@ namespace addressbook_web_test
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
 
+        }
+        [Test]
+        public void TestDBConnectivity()
+        {
+            DateTime start = DateTime.Now;
+            List<Class2_GroupData> fromUI = app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            Console.Out.WriteLine("UI " + end.Subtract(start));
+
+            start = DateTime.Now;
+            List<Class2_GroupData> fromDB = Class2_GroupData.GetAllGroupInfo();
+            end = DateTime.Now;
+            Console.Out.WriteLine("DB " + end.Subtract(start));
         }
 
     }
