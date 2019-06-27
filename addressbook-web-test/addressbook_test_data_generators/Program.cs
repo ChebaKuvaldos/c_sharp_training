@@ -38,6 +38,7 @@ namespace addressbook_test_data_generators
                         Email2 = TestBase.GenerateRandomString(10),
                         Email3 = TestBase.GenerateRandomString(10)
                     });
+                };
                     if (format == "csv")
                     {
                         WriteContactsToCsvFile(contacts, writer);
@@ -54,7 +55,7 @@ namespace addressbook_test_data_generators
                     {
                         Console.Out.Write("Unrecognized format " + format);
                     }
-                }
+                
                 writer.Close();
             }
 

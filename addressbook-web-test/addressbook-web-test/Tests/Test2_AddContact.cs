@@ -56,13 +56,13 @@ namespace addressbook_web_test
                     .Deserialize(new StreamReader(@"contact.xml"));
         }
 
-        public static IEnumerable<Class3_ContactData> GroupDataFromJsonFile()
+        public static IEnumerable<Class3_ContactData> ContactDataFromJsonFile()
         {
             return JsonConvert.DeserializeObject<List<Class3_ContactData>>
                  (File.ReadAllText(@"contact.json"));
         }
 
-        [Test, TestCaseSource("WriteContactsToXmlFile")]
+        [Test, TestCaseSource("ContactDataFromJsonFile")]
         public void TheAddContactTest(Class3_ContactData contact)
         {
             List<Class3_ContactData> oldContact = app.Contacts.GetContactsList();
