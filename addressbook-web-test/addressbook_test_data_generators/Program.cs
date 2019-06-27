@@ -25,14 +25,18 @@ namespace addressbook_test_data_generators
                 List<Class3_ContactData> contacts = new List<Class3_ContactData>();
                 for (int i = 0; i < count; i++)
                 {
-                    contacts.Add(new Class3_ContactData()
+                    contacts.Add(new Class3_ContactData(
+                        TestBase.GenerateRandomString(10),
+                        TestBase.GenerateRandomString(10))
                     {
-                        Firstname = TestBase.GenerateRandomString(10),
-                        Lastname = TestBase.GenerateRandomString(10),
+
                         Address = TestBase.GenerateRandomString(10),
                         MobilePhone = TestBase.GenerateRandomString(10),
+                        HomePhone = TestBase.GenerateRandomString(10),
+                        WorkPhone = TestBase.GenerateRandomString(10),
                         Email = TestBase.GenerateRandomString(10),
-
+                        Email2 = TestBase.GenerateRandomString(10),
+                        Email3 = TestBase.GenerateRandomString(10)
                     });
                     if (format == "csv")
                     {
@@ -48,9 +52,12 @@ namespace addressbook_test_data_generators
                     }
                     else
                     {
-                        Console.Out.Write("Unrecognized format" + format);
+                        Console.Out.Write("Unrecognized format " + format);
                     }
-                } }
+                }
+                writer.Close();
+            }
+
             else if (dataType == "group")
             {
 
@@ -78,7 +85,8 @@ namespace addressbook_test_data_generators
                 else
                 {
                     Console.Out.Write("Unrecognized format" + format);
-                } }
+                }
+            }
 
 
                 writer.Close();
@@ -94,12 +102,14 @@ namespace addressbook_test_data_generators
 
             static void WriteGroupsToXmlFile(List<Class2_GroupData> groups, StreamWriter writer)
             {
-            new XmlSerializer(typeof(List<Class2_GroupData>)).Serialize(writer, groups);
+            new XmlSerializer(typeof(List<Class2_GroupData>)).
+                Serialize(writer, groups);
             }
 
         static void WriteGroupsToJsonFile(List<Class2_GroupData> groups, StreamWriter writer)
         {
-            writer.Write(JsonConvert.SerializeObject(groups, Newtonsoft.Json.Formatting.Indented));
+            writer.Write(JsonConvert.SerializeObject(groups, 
+                Newtonsoft.Json.Formatting.Indented));
         }
 
         //Contact Methods
@@ -107,18 +117,21 @@ namespace addressbook_test_data_generators
         {
             foreach (Class3_ContactData contact in contacts)
                 writer.WriteLine(string.Format("${0},${1},${2},${3},${4}",
-                contact.Firstname, contact.Lastname, contact.Address, contact.MobilePhone,
-                contact.Email));
+                contact.Firstname, contact.Lastname, contact.Address, 
+                contact.MobilePhone, contact.WorkPhone, contact.HomePhone,
+                contact.Email, contact.Email2, contact.Email3));
         }
 
         static void WriteContactsToXmlFile(List<Class3_ContactData> contacts, StreamWriter writer)
         {
-            new XmlSerializer(typeof(List<Class3_ContactData>)).Serialize(writer, contacts);
+            new XmlSerializer(typeof(List<Class3_ContactData>))
+                .Serialize(writer, contacts);
         }
 
         static void WriteContactsToJsonFile(List<Class3_ContactData> contacts, StreamWriter writer)
         {
-            writer.Write(JsonConvert.SerializeObject(contacts, Newtonsoft.Json.Formatting.Indented));
+            writer.Write(JsonConvert.SerializeObject(contacts, 
+                Newtonsoft.Json.Formatting.Indented));
         }
 
     }
