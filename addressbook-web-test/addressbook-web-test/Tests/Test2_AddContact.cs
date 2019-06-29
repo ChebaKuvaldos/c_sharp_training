@@ -74,5 +74,6 @@ namespace addressbook_web_test
             Assert.AreEqual(oldContact, newContact);
 
         }
+
         }
 }

@@ -92,6 +92,15 @@ namespace addressbook_web_test
         [Test]
         public void TestDBConnectivity()
         {
+            foreach (Class3_ContactData contact in Class2_GroupData.GetAllGroupInfo()[0].GetContacts())
+            {
+                Console.Out.WriteLine(contact);
+            };
+            
+            
+            
+            /* --Скорость проверки из UI и BD
+              
             DateTime start = DateTime.Now;
             List<Class2_GroupData> fromUI = app.Groups.GetGroupList();
             DateTime end = DateTime.Now;
@@ -101,7 +110,8 @@ namespace addressbook_web_test
             List<Class2_GroupData> fromDB = Class2_GroupData.GetAllGroupInfo();
             end = DateTime.Now;
             Console.Out.WriteLine("DB = " + end.Subtract(start));
-        }
+            */    
+    }
 
     }
     }

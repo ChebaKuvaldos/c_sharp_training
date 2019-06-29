@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
 using System.Text.RegularExpressions;
+using LinqToDB;
+using LinqToDB.Mapping;
 
 namespace addressbook_web_test
 {
+    [Table(Name = "addressbook")]
     public class Class3_ContactData : IEquatable<Class3_ContactData>, IComparable<Class3_ContactData>
     {
         
@@ -73,11 +76,14 @@ namespace addressbook_web_test
             }
             return Lastname.CompareTo(other.Lastname);
         }
+        [Column(Name = "id"),PrimaryKey]
+        public string Id { get; set; }
 
+        [Column (Name = "firstname")]
         public string Firstname { get; set; }
 
         public string Middlename { get; set; }
-
+        [Column(Name = "lastname")]
         public string Lastname { get; set; }
 
         public string Nickname { get; set; }
@@ -85,11 +91,11 @@ namespace addressbook_web_test
         public string Title { get; set; }
 
         public string Company { get; set; }
-
+        [Column(Name = "address")]
         public string Address { get; set; }
 
         public string HomePhone { get; set; }
-
+        [Column(Name = "mobile")]
         public string MobilePhone { get; set; }
 
         public string WorkPhone { get; set; }
@@ -120,7 +126,7 @@ namespace addressbook_web_test
         }
 
         public string Fax { get; set; }
-
+        [Column(Name = "email")]
         public string Email { get; set; }
 
         public string Email2 { get; set; }
