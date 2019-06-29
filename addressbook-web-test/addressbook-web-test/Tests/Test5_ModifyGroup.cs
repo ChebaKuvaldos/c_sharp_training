@@ -21,9 +21,10 @@ namespace addressbook_web_test
             Class2_GroupData newData = new Class2_GroupData("Yozha");
             newData.Header = null;
             newData.Footer = null;
-            List<Class2_GroupData> oldGroups = app.Groups.GetGroupList();
-            app.Groups.ModifyGroup(0, newData);
-            List<Class2_GroupData> newGroups = app.Groups.GetGroupList();
+            List<Class2_GroupData> oldGroups = Class2_GroupData.GetAllGroupInfo();
+            Class2_GroupData toBeUpdate = oldGroups[0];
+            app.Groups.ModifyGroup(toBeUpdate, newData);
+            List<Class2_GroupData> newGroups = Class2_GroupData.GetAllGroupInfo();
             oldGroups[0].Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();

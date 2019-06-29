@@ -127,10 +127,10 @@ namespace addressbook_web_test
             return this;
         }
         
-            public void ModifyGroup(int v, Class2_GroupData newData)
+            public void ModifyGroup(Class2_GroupData groups, Class2_GroupData newData)
         {
             GroupExist()
-            .SelectGroup(v)
+            .SelectGroupId(groups.Id)
             .ModifySelectedGroup()
             .FillGroupForm(newData)
             .UpdateGroup();

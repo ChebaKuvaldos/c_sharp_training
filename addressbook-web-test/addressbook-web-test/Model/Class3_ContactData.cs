@@ -76,7 +76,7 @@ namespace addressbook_web_test
             }
             return Lastname.CompareTo(other.Lastname);
         }
-        [Column(Name = "id"),PrimaryKey]
+        [Column(Name = "id"),PrimaryKey, Identity]
         public string Id { get; set; }
 
         [Column (Name = "firstname")]
@@ -266,6 +266,14 @@ namespace addressbook_web_test
             }
         }
 
+
+        public static List<Class3_ContactData> GetAllContactInfo()
+        {
+            using (AddressbookDB db = new AddressbookDB())
+            {
+                return (from c in db.Contacts select c).ToList();
+            }
+        }
 
     }
 }

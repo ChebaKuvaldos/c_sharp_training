@@ -65,9 +65,9 @@ namespace addressbook_web_test
         [Test, TestCaseSource("ContactDataFromJsonFile")]
         public void TheAddContactTest(Class3_ContactData contact)
         {
-            List<Class3_ContactData> oldContact = app.Contacts.GetContactsList();
+            List<Class3_ContactData> oldContact = Class3_ContactData.GetAllContactInfo();
             app.Contacts.CreateContact(contact);
-            List<Class3_ContactData> newContact = app.Contacts.GetContactsList();
+            List<Class3_ContactData> newContact = Class3_ContactData.GetAllContactInfo();
             oldContact.Add(contact);
             oldContact.Sort();
             newContact.Sort();

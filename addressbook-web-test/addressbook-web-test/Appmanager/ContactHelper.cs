@@ -174,6 +174,12 @@ namespace addressbook_web_test
             return this;
         }
 
+        public ContactHelper SelectContactId(string id)
+        {
+            driver.FindElement(By.XPath("//a[@href='edit.php?id=" + id + "']")).Click();
+            return this;
+        }
+
         public ContactHelper DeleteSelectedContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
@@ -194,11 +200,19 @@ namespace addressbook_web_test
             return this;
         }
 
-        public ContactHelper EditContact(int index)
+        public ContactHelper EditContactDB(string id)
         {
-            driver.FindElements(By.Name("entry"))[index]
-                .FindElements(By.TagName("td"))[7]
-                .FindElement(By.TagName("a")).Click();
+            driver.FindElement(By.XPath("(//input [@name='selected[]' and @value = '" + id + "'])"))
+               .FindElement(By.XPath("(.//img[@alt='Edit'])")).Click();
+            return this;
+        }
+
+        public ContactHelper EditContact(int id)
+        {
+
+           driver.FindElements(By.Name("entry"))[id]
+                  .FindElements(By.TagName("td"))[7]
+                  .FindElement(By.TagName("a")).Click();
             return this;
         }
 
@@ -235,13 +249,27 @@ namespace addressbook_web_test
 
         }
 
-        public void ModifyContact(Class3_ContactData data)
+        public void RemoveContactDB(Class3_ContactData contact)
+        {
+            manager.Navigator.HomePage();
+            SelectContactId(contact.Id)
+                      .DeleteSelectedContact();
+            driver.SwitchTo().Alert().Accept();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
+            driver.FindElement(By.CssSelector("div.msgbox"));
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
+            manager.Navigator.HomePage();
+
+        }
+
+        public void ModifyContact(Class3_ContactData contact ,Class3_ContactData data)
         {
             manager.Navigator.HomePage();
             ContactExist();
             EditContact(0)
+            
                         .FillContactData(data)
-                        .UpdateContact(); ;
+                        .UpdateContact(); 
         }
     }
 }
