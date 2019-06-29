@@ -92,6 +92,7 @@
     <Compile Include="Appmanager\NavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AuthTestBase.cs" />
+    <Compile Include="Tests\GroupTestBase.cs" />
     <Compile Include="Tests\Test1_CreateGroup.cs" />
     <Compile Include="Tests\Test2_AddContact.cs" />
     <Compile Include="Tests\Test3_RemoveGroup.cs" />

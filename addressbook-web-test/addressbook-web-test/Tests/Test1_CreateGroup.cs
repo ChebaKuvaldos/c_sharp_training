@@ -13,7 +13,7 @@ using System.Linq;
 namespace addressbook_web_test
 {
     [TestFixture]
-    public class GroupCreationTest : AuthTestBase
+    public class GroupCreationTest : GroupTestBase
     {
         public static IEnumerable<Class2_GroupData> RandomGroupDataProvider()
         {
@@ -63,9 +63,9 @@ namespace addressbook_web_test
         public void CreateGroup(Class2_GroupData group)
         {
             app.Navigator.GroupsPage();
-            List<Class2_GroupData> oldGroups = app.Groups.GetGroupList();
+            List<Class2_GroupData> oldGroups = Class2_GroupData.GetAllGroupInfo();
             app.Groups.Create(group);
-            List<Class2_GroupData> newGroups = app.Groups.GetGroupList();
+            List<Class2_GroupData> newGroups = Class2_GroupData.GetAllGroupInfo();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
@@ -95,12 +95,12 @@ namespace addressbook_web_test
             DateTime start = DateTime.Now;
             List<Class2_GroupData> fromUI = app.Groups.GetGroupList();
             DateTime end = DateTime.Now;
-            Console.Out.WriteLine("UI " + end.Subtract(start));
+            Console.Out.WriteLine("UI = " + end.Subtract(start));
 
             start = DateTime.Now;
             List<Class2_GroupData> fromDB = Class2_GroupData.GetAllGroupInfo();
             end = DateTime.Now;
-            Console.Out.WriteLine("DB " + end.Subtract(start));
+            Console.Out.WriteLine("DB = " + end.Subtract(start));
         }
 
     }

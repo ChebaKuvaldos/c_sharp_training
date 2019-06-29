@@ -9,21 +9,25 @@ using OpenQA.Selenium;
 namespace addressbook_web_test
 {
     [TestFixture]
-    public class Test3_RemoveGroup : AuthTestBase
+    public class Test3_RemoveGroup : GroupTestBase
     {
         [Test]
         public void RemoveGroupTest()
         {
             app.Navigator.GroupsPage();
 
-            List<Class2_GroupData> oldGroups = app.Groups.GetGroupList();
+            List<Class2_GroupData> oldGroups = Class2_GroupData.GetAllGroupInfo();
+            Class2_GroupData toBeRemoved = oldGroups[0];
+
             app.Groups.GroupExist();
-            app.Groups.RemoveGroup(0);
-            List<Class2_GroupData> newGroups = app.Groups.GetGroupList();
+            app.Groups.RemoveGroupDB(toBeRemoved);
+
+          //  app.Groups.GroupExist();
+          //  app.Groups.RemoveGroup(0);
+            List<Class2_GroupData> newGroups = Class2_GroupData.GetAllGroupInfo();
 
             oldGroups.RemoveAt(0);
-            oldGroups.Sort();
-            newGroups.Sort();
+
             Assert.AreEqual(oldGroups, newGroups);
         }
     }

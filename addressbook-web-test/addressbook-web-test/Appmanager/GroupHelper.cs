@@ -25,7 +25,7 @@ namespace addressbook_web_test
             if (groupCache == null)
             {
                 groupCache = new List<Class2_GroupData>();
-                
+
                 manager.Navigator.GroupsPage();
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
                 foreach (IWebElement element in elements)
@@ -54,6 +54,12 @@ namespace addressbook_web_test
         public GroupHelper SelectGroup(int index)
         {           
             driver.FindElement(By.XPath("(//input [@name='selected[]'])[" + (index + 1) + "]")).Click();
+            return this;
+        }
+
+        public GroupHelper SelectGroupId(string id)
+        {
+            driver.FindElement(By.XPath("(//input [@name='selected[]' and @value = '"+ id +"'])")).Click();
             return this;
         }
 
@@ -114,7 +120,14 @@ namespace addressbook_web_test
             return this;
         }
 
-        public void ModifyGroup(int v, Class2_GroupData newData)
+        public GroupHelper RemoveGroupDB(Class2_GroupData groups)
+        {
+            SelectGroupId(groups.Id);
+            DeleteSelectedGroup();
+            return this;
+        }
+        
+            public void ModifyGroup(int v, Class2_GroupData newData)
         {
             GroupExist()
             .SelectGroup(v)
