@@ -36,6 +36,7 @@ namespace addressbook_web_test
             return new List<Class3_ContactData>(contactCache);
         }
 
+
         public Class3_ContactData GetContactInformationFromTable(int index)
         {
             manager.Navigator.HomePage();
@@ -180,6 +181,12 @@ namespace addressbook_web_test
             return this;
         }
 
+        public ContactHelper SelectContactId2(string contactId)
+        {
+            driver.FindElement(By.Id(contactId)).Click();
+            return this;
+        }
+
         public ContactHelper DeleteSelectedContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
@@ -270,6 +277,32 @@ namespace addressbook_web_test
             
                         .FillContactData(data)
                         .UpdateContact(); 
+        }
+
+        public void AddContactToGroup(Class3_ContactData contact, Class2_GroupData group)
+        {
+            manager.Navigator.HomePage();
+            ClearGroupFilter();
+            SelectContactId2(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until
+                (d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        private void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        private void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        private void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
     }
 }

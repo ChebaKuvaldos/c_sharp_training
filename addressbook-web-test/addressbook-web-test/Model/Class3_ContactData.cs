@@ -265,13 +265,16 @@ namespace addressbook_web_test
                 contactInfo = value;
             }
         }
-
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
 
         public static List<Class3_ContactData> GetAllContactInfo()
         {
             using (AddressbookDB db = new AddressbookDB())
             {
-                return (from c in db.Contacts select c).ToList();
+                return (from c in db.Contacts.Where
+                        (x => x.Deprecated == "0000-00-00 00:00:00")
+                                                  select c).ToList();
             }
         }
 

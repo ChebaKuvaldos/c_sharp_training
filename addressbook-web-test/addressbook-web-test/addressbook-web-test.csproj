@@ -103,6 +103,7 @@
     <Compile Include="Tests\Test6_ModifyContact.cs" />
     <Compile Include="Tests\Test7_LoginTests.cs" />
     <Compile Include="Tests\Test8_ContactInformationTest.cs" />
+    <Compile Include="Tests\Test9_AddContactToGroup.cs" />
     <Compile Include="Tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
